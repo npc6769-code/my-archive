@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS1201: Student Vault</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial; padding: 40px; background: #f9f9f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { color: #003366; border-bottom: 2px solid #003366; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #eee; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; color: #333; }
+        a { color: #0056b3; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My Personal Homework & Letter Archive</h2>
+        <table id="file-table">
+            <thead>
+                <tr><th>Sl. No</th><th>File Name</th><th>Action</th></tr>
+            </thead>
+            <tbody id="file-list">
+                </tbody>
+        </table>
+    </div>
+
+    <script>
+        // REPLACE 'username' and 'repo' with your actual GitHub info
+        const user = 'YOUR_GITHUB_USERNAME';
+        const repo = 'YOUR_REPO_NAME';
+        const folder = 'letters'; 
+
+        async function fetchFiles() {
+            const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${folder}`);
+            const files = await response.json();
+            const tableBody = document.getElementById('file-list');
+
+            files.forEach((file, index) => {
+                const row = `<tr>
+                    <td>${index + 1}</td>
+                    <td>${file.name}</td>
+                    <td><a href="${file.download_url}" target="_blank">View / Download</a></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+        fetchFiles();
+    </script>
+</body>
+</html>

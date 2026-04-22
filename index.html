@@ -26,10 +26,14 @@
     </div>
 
     <script>
-        // REPLACE 'username' and 'repo' with your actual GitHub info
-        const user = 'YOUR_GITHUB_USERNAME';
-        const repo = 'YOUR_REPO_NAME';
-        const folder = 'letters'; 
+       // Change 'YOUR_GITHUB_USERNAME' to 'npc6769-code'
+const user = 'npc6769-code'; 
+
+// Change 'YOUR_REPO_NAME' to 'my-archive'
+const repo = 'my-archive'; 
+
+// This looks for a folder named 'letters'
+const folder = 'letters';
 
         async function fetchFiles() {
             const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${folder}`);
